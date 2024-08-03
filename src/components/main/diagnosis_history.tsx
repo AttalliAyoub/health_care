@@ -7,12 +7,10 @@ import RespiratoryRate from "../assets/respiratory_rate.png";
 import Temperature from "../assets/temperature.png";
 export const DiagnosisHistory = ({ patient }: { patient: APIPatient | null }) => {
 
-
     const data = patient?.diagnosis_history;
     const last = (data && data.length) ? data[data.length - 1] : null;
     const last_time = new Date(`${last?.month}, ${last?.year}`);
     const last6months = new Date(last_time.getTime() -  1000 * 60 * 60 * 24 * 30 * 6);
-    console.log({ last, last_time, last6months });
     const history = data?.filter(p => new Date(`${p.month}, ${p.year}`).getTime() > last6months.getTime());
 
     return <Card sx={{
