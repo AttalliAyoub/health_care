@@ -31,6 +31,14 @@ export const theme = createTheme({
     // },
   },
   components: {
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+        style: {
+          borderRadius: "16px",
+        }
+      }
+    },
     MuiButtonBase: {
       defaultProps: {
         style: {
@@ -52,7 +60,6 @@ export const theme = createTheme({
           textTransform: "none",
         },
       },
-      styleOverrides: {},
     },
   },
 });

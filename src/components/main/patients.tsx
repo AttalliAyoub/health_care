@@ -1,11 +1,15 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Box, CardHeader, CircularProgress, IconButton } from "@mui/material";
 import Card from "@mui/material/Card";
+import React from 'react';
 import useFetch from "../../utils/backend";
 import { APIError, APIPatient } from "../../utils/types";
 import { ListTile } from "../list_tile";
 
-export const Patients = () => {
+type setSelectedType = React.Dispatch<React.SetStateAction<APIPatient | null>>;
+
+export const Patients = ({ selected, setSelected }: { selected: APIPatient | null, setSelected: setSelectedType }) => {
+
   const { data, error, isPending } = useFetch<APIPatient[], APIError>({
     transform: (data) => (data as APIPatient[]).map(p => {
       p.date_of_birth = new Date(p.date_of_birth);
@@ -13,18 +17,20 @@ export const Patients = () => {
     })
   });
 
+  React.useEffect(() => {
+    if (!selected && data && data.length) {
+      setSelected(data[3]);
+    }
+  }, [JSON.stringify(data)]);
+
   return (
     <Card
-      elevation={0}
       sx={{
         width: "367px",
         height: "1054px",
         marginTop: "18px",
-        borderRadius: "16px",
-        // border: 'none',
         display: 'flex',
         flexDirection: 'column'
-
       }}
     >
       <CardHeader
@@ -59,7 +65,11 @@ export const Patients = () => {
         padding: 0,
         listStyle: "none",
       }} >
-        {data && data.length && data.map((p, i) => <ListTile key={i} patient={p} />)}
+        {data && data.length && data.map((p, i) => {
+          return <ListTile key={i} selected={selected} patient={p} click={() => {
+            setSelected(p);
+          }} />;
+        })}
       </Box>
 
     </Card>
