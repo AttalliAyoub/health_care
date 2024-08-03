@@ -13,7 +13,7 @@ export const DiagnosticListWidget = ({ patient }: { patient: APIPatient | null }
         padding: '20px',
     }} >
 
-        <CardHeader title='Diagnostic List' style={{ padding: 0 }} />
+        <CardHeader title='Diagnostic List' titleTypographyProps={{ variant: 'h5' }} style={{ padding: 0 }} />
         <Box sx={{
             marginTop: '40px',
             height: '48px',
@@ -39,7 +39,7 @@ export const DiagnosticListWidget = ({ patient }: { patient: APIPatient | null }
         }} >
             <div style={{ height: '10px' }} />
 
-            {list?.map(diagnostic => (<Box sx={{
+            {list?.map((diagnostic, i) => (<Box key={i} sx={{
                 display: 'flex',
                 marginBottom: '7px',
                 minHeight: '40px',

@@ -4,7 +4,10 @@ import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import { Avatar, Box, Button, Card, Typography } from "@mui/material";
 import { APIPatient } from "../../utils/types";
+import JessicaTaylorImage from '../assets/Jessica_Taylor.png';
 export const PatientInfo = ({ patient }: { patient: APIPatient | null }) => {
+
+    const image = patient && patient.name == 'Jessica Taylor' ? JessicaTaylorImage : patient?.profile_picture;
 
     return <Card sx={{
         flex: 1,
@@ -17,7 +20,7 @@ export const PatientInfo = ({ patient }: { patient: APIPatient | null }) => {
         alignItems: 'center'
     }} >
 
-        <Avatar src={patient?.profile_picture} sx={{ width: '200px', height: '200px' }} />
+        <Avatar src={image} sx={{ width: '200px', height: '200px' }} />
         <Box style={{ height: 24 }} />
         <Typography variant="h5" > {patient?.name} </Typography>
         <Box style={{ height: 24 }} />

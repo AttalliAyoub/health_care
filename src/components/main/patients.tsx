@@ -13,6 +13,11 @@ export const Patients = ({ selected, setSelected }: { selected: APIPatient | nul
   const { data, error, isPending } = useFetch<APIPatient[], APIError>({
     transform: (data) => (data as APIPatient[]).map(p => {
       p.date_of_birth = new Date(p.date_of_birth);
+      p.diagnosis_history = p.diagnosis_history.sort((a, b) => {
+        const da = new Date(`${a.month}, ${a.year}`);
+        const db = new Date(`${b.month}, ${b.year}`);
+        return da.getTime() - db.getTime();
+      });
       return p;
     })
   });

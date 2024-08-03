@@ -14,7 +14,7 @@ export const LabResults = ({ patient }: { patient: APIPatient | null }) => {
         flexDirection: 'column'
     }} >
 
-        <CardHeader title='Lab Results' />
+        <CardHeader title='Lab Results' titleTypographyProps={{ variant: 'h5' }} />
 
         <Box sx={{
             marginTop: '16px',
