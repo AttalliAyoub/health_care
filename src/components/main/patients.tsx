@@ -65,7 +65,7 @@ export const Patients = ({ selected, setSelected }: { selected: APIPatient | nul
         padding: 0,
         listStyle: "none",
       }} >
-        {data && data.length && data.map((p, i) => {
+        {data?.map((p, i) => {
           return <ListTile key={i} selected={selected} patient={p} click={() => {
             setSelected(p);
           }} />;
